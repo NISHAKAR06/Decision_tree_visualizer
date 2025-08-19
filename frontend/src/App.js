@@ -7,7 +7,7 @@ const API = `${BACKEND_URL}/api`;
 
 // Tree Visualization Component
 const TreeVisualization = ({ treeData, onNodeClick }) => {
-  const renderNode = (node, x = 400, y = 50, level = 0) => {
+  const renderNode = (node, x = 400, y = 100, level = 0) => {
     if (!node) return null;
 
     const nodeRadius = 40;
@@ -95,8 +95,8 @@ const TreeVisualization = ({ treeData, onNodeClick }) => {
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-4 h-[600px] overflow-auto">
-      <h3 className="text-lg font-semibold mb-4 sticky top-0 bg-white p-2">Decision Tree Visualization</h3>
-      <svg width="800" height="600" className="border border-gray-200 rounded">
+      <h3 className="text-lg font-semibold mb-4">Decision Tree Visualization</h3>
+      <svg width="800" height="800" className="border border-gray-200 rounded">
         {renderNode(treeData)}
       </svg>
     </div>
@@ -106,6 +106,10 @@ const TreeVisualization = ({ treeData, onNodeClick }) => {
 // Algorithm Steps Component
 const AlgorithmSteps = ({ steps }) => {
   const [currentStep, setCurrentStep] = useState(0);
+
+  useEffect(() => {
+    setCurrentStep(0);
+  }, [steps]);
 
   if (!steps || steps.length === 0) {
     return (
@@ -117,6 +121,15 @@ const AlgorithmSteps = ({ steps }) => {
   }
 
   const step = steps[currentStep];
+
+  if (!step) {
+    return (
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <h3 className="text-lg font-semibold mb-4">Algorithm Steps</h3>
+        <p className="text-gray-500">Error: Step not found.</p>
+      </div>
+    );
+  }
 
   const renderStepContent = () => {
     switch (step.step_type) {

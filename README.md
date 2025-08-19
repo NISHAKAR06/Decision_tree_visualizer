@@ -1,4 +1,3 @@
-
 # Decision Tree Visualizer
 
 A web application for visualizing the ID3 decision tree algorithm, built with FastAPI (Python backend) and React (JavaScript frontend). This tool lets users upload datasets, view step-by-step tree construction, and interactively explore decision trees.
